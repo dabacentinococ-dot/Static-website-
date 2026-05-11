@@ -1,0 +1,1318 @@
+Html, css
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+
+  <title>Lost & Found System</title>
+
+  <style>
+
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background-color: #f0f0f0;
+
+    }
+
+    .page {
+
+      display: none;
+
+    }
+
+    .page.active {
+
+      display: block;
+
+    }
+
+    .container {
+
+      max-width: 1000px;
+
+      margin: 0 auto;
+
+      padding: 20px;
+
+    }
+
+    .header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 30px;
+
+      background-color: white;
+
+      padding: 15px;
+
+      border-radius: 8px;
+
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    }
+
+    .user-info {
+
+      font-size: 16px;
+
+      color: #333;
+
+    }
+
+    .logout-btn {
+
+      background-color: #f44336;
+
+      color: white;
+
+      padding: 10px 20px;
+
+      border: none;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+    }
+
+    .logout-btn:hover {
+
+      background-color: #da190b;
+
+    }
+
+    h1 {
+
+      text-align: center;
+
+      color: #333;
+
+      margin-bottom: 20px;
+
+    }
+
+    h2 {
+
+      color: #333;
+
+      margin-top: 30px;
+
+      border-bottom: 2px solid #4CAF50;
+
+      padding-bottom: 10px;
+
+    }
+
+    .form-group {
+
+      margin-bottom: 15px;
+
+    }
+
+    label {
+
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: #555;
+
+      font-weight: bold;
+
+    }
+
+    input[type="text"],
+
+    input[type="email"],
+
+    input[type="password"],
+
+    select,
+
+    textarea {
+
+      width: 100%;
+
+      padding: 10px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 4px;
+
+      box-sizing: border-box;
+
+      font-size: 14px;
+
+    }
+
+    textarea {
+
+      resize: vertical;
+
+      min-height: 100px;
+
+    }
+
+    button {
+
+      padding: 10px 20px;
+
+      background-color: #4CAF50;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+
+      font-size: 16px;
+
+      margin-top: 10px;
+
+    }
+
+    button:hover {
+
+      background-color: #45a049;
+
+    }
+
+    .menu-buttons {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+    .menu-buttons button {
+
+      width: 100%;
+
+      padding: 15px;
+
+    }
+
+    .toggle-link {
+
+      text-align: center;
+
+      margin-top: 15px;
+
+      font-size: 14px;
+
+    }
+
+    .toggle-link a {
+
+      color: #4CAF50;
+
+      cursor: pointer;
+
+      text-decoration: underline;
+
+    }
+
+    .message {
+
+      text-align: center;
+
+      margin-top: 15px;
+
+      padding: 10px;
+
+      border-radius: 4px;
+
+    }
+
+    .error {
+
+      background-color: #f8d7da;
+
+      color: #721c24;
+
+    }
+
+    .success {
+
+      background-color: #d4edda;
+
+      color: #155724;
+
+    }
+
+    .hidden {
+
+      display: none;
+
+    }
+
+    table {
+
+      border-collapse: collapse;
+
+      width: 100%;
+
+      margin-top: 20px;
+
+      background-color: white;
+
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    }
+
+    th, td {
+
+      border: 1px solid #ddd;
+
+      padding: 12px;
+
+      text-align: left;
+
+    }
+
+    th {
+
+      background-color: #4CAF50;
+
+      color: white;
+
+      font-weight: bold;
+
+    }
+
+    tr:nth-child(even) {
+
+      background-color: #f9f9f9;
+
+    }
+
+    tr:hover {
+
+      background-color: #f0f0f0;
+
+    }
+
+    .delete-btn {
+
+      background-color: #f44336;
+
+      color: white;
+
+      padding: 8px 12px;
+
+      border: none;
+
+      border-radius: 3px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+    }
+
+    .delete-btn:hover {
+
+      background-color: #da190b;
+
+    }
+
+    .claim-btn {
+
+      background-color: #008CBA;
+
+      color: white;
+
+      padding: 8px 12px;
+
+      border: none;
+
+      border-radius: 3px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+    }
+
+    .claim-btn:hover {
+
+      background-color: #007399;
+
+    }
+
+    .search-box {
+
+      margin-bottom: 20px;
+
+      padding: 15px;
+
+      background-color: white;
+
+      border-radius: 8px;
+
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    }
+
+    .search-box input {
+
+      width: 100%;
+
+      padding: 10px;
+
+      font-size: 16px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 4px;
+
+      box-sizing: border-box;
+
+    }
+
+    .no-items {
+
+      text-align: center;
+
+      padding: 20px;
+
+      color: #999;
+
+      font-style: italic;
+
+    }
+
+    .section {
+
+      margin-bottom: 40px;
+
+    }
+
+    .admin-only {
+
+      display: none;
+
+    }
+
+    .back-btn {
+
+      background-color: #2196F3;
+
+      color: white;
+
+      padding: 10px 20px;
+
+      border: none;
+
+      border-radius: 4px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+      margin-top: 20px;
+
+    }
+
+    .back-btn:hover {
+
+      background-color: #1976D2;
+
+    }
+
+    .login-container {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 100vh;
+
+      background-color: #f0f0f0;
+
+    }
+
+    .login-box {
+
+      background-color: white;
+
+      padding: 40px;
+
+      border-radius: 8px;
+
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+      width: 300px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <!-- LOGIN PAGE -->
+
+  <div id="loginPage" class="page active">
+
+    <div class="login-container">
+
+      <div class="login-box">
+
+        <div id="loginForm">
+
+          <h1>Lost & Found</h1>
+
+          <h2 style="text-align: center; font-size: 18px; border: none; margin-top: 0;">Login</h2>
+
+         
+
+          <div class="form-group">
+
+            <label for="loginEmail">Email:</label>
+
+            <input type="email" id="loginEmail" placeholder="Enter your email">
+
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <label for="loginPassword">Password:</label>
+
+            <input type="password" id="loginPassword" placeholder="Enter your password">
+
+          </div>
+
+         
+
+          <button onclick="login()">Login</button>
+
+         
+
+          <div class="toggle-link">
+
+            Don't have an account? <a onclick="toggleLoginRegister()">Register here</a>
+
+          </div>
+
+         
+
+          <div id="loginMessage"></div>
+
+        </div>
+
+
+        <div id="registerForm" class="hidden">
+
+          <h1>Lost & Found</h1>
+
+          <h2 style="text-align: center; font-size: 18px; border: none; margin-top: 0;">Register</h2>
+
+         
+
+          <div class="form-group">
+
+            <label for="registerName">Full Name:</label>
+
+            <input type="text" id="registerName" placeholder="Enter your full name">
+
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <label for="registerEmail">Email:</label>
+
+            <input type="email" id="registerEmail" placeholder="Enter your email">
+
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <label for="registerPassword">Password:</label>
+
+            <input type="password" id="registerPassword" placeholder="Enter a password (min 6 characters)">
+
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <label for="registerConfirmPassword">Confirm Password:</label>
+
+            <input type="password" id="registerConfirmPassword" placeholder="Confirm your password">
+
+          </div>
+
+         
+
+          <div class="form-group">
+
+            <label for="userType">Account Type:</label>
+
+            <select id="userType">
+
+              <option value="normal">Normal User</option>
+
+              <option value="admin">Admin</option>
+
+            </select>
+
+          </div>
+
+         
+
+          <button onclick="register()">Register</button>
+
+         
+
+          <div class="toggle-link">
+
+            Already have an account? <a onclick="toggleLoginRegister()">Login here</a>
+
+          </div>
+
+         
+
+          <div id="registerMessage"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MENU PAGE -->
+
+  <div id="menuPage" class="page">
+
+    <div class="header">
+
+      <h2>Lost & Found System</h2>
+
+      <div>
+
+        <span class="user-info">Welcome, <strong id="userName"></strong> (<span id="userType"></span>)</span>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container">
+
+      <h1>Main Menu</h1>
+
+      <div class="menu-buttons">
+
+        <button onclick="goToPage('reportFoundPage')">Report Found Item</button>
+
+        <button onclick="goToPage('reportLostPage')">Report Lost Item</button>
+
+        <button onclick="goToPage('viewItemsPage')">View All Items</button>
+
+        <div id="adminOnly" class="admin-only">
+
+          <button onclick="goToPage('adminPage')">Admin Panel</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- REPORT FOUND ITEM PAGE -->
+
+  <div id="reportFoundPage" class="page">
+
+    <div class="header">
+
+      <h2>Report Found Item</h2>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <div class="container">
+
+      <h1>Report Found Item</h1>
+
+      <form id="foundform">
+
+        <div class="form-group">
+
+          <label for="foundItemName">Item Name:</label>
+
+          <input type="text" id="foundItemName" placeholder="Enter item name" required>
+
+        </div>
+
+       
+
+        <div class="form-group">
+
+          <label for="foundDescription">Description:</label>
+
+          <textarea id="foundDescription" placeholder="Enter item description" required></textarea>
+
+        </div>
+
+       
+
+        <div class="form-group">
+
+          <label for="foundDate">Date Found:</label>
+
+          <input type="text" id="foundDate" placeholder="MM/DD/YY format" required>
+
+        </div>
+
+       
+
+        <button type="submit">Submit</button>
+
+      </form>
+
+     
+
+      <div id="foundMessage"></div>
+
+      <button class="back-btn" onclick="goToPage('menuPage')">← Back to Menu</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- REPORT LOST ITEM PAGE -->
+
+  <div id="reportLostPage" class="page">
+
+    <div class="header">
+
+      <h2>Report Lost Item</h2>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <div class="container">
+
+      <h1>Report Lost Item</h1>
+
+      <form id="lostform">
+
+        <div class="form-group">
+
+          <label for="lostItemName">Item Name:</label>
+
+          <input type="text" id="lostItemName" placeholder="Enter item name" required>
+
+        </div>
+
+       
+
+        <div class="form-group">
+
+          <label for="lostDescription">Description:</label>
+
+          <textarea id="lostDescription" placeholder="Enter item description" required></textarea>
+
+        </div>
+
+       
+
+        <div class="form-group">
+
+          <label for="lostDate">Date Lost:</label>
+
+          <input type="text" id="lostDate" placeholder="MM/DD/YY format" required>
+
+        </div>
+
+       
+
+        <button type="submit">Submit</button>
+
+      </form>
+
+     
+
+      <div id="lostMessage"></div>
+
+      <button class="back-btn" onclick="goToPage('menuPage')">← Back to Menu</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- VIEW ALL ITEMS PAGE -->
+
+  <div id="viewItemsPage" class="page">
+
+    <div class="header">
+
+      <h2>View All Items</h2>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <div class="container">
+
+      <h1>All Items</h1>
+
+     
+
+      <div class="search-box">
+
+        <input type="text" id="searchBox" placeholder="Search items by name or description...">
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>📦 Found Items</h2>
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Item Name</th>
+
+              <th>Description</th>
+
+              <th>Date</th>
+
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="foundItemsBody">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>🔍 Lost Items</h2>
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Item Name</th>
+
+              <th>Description</th>
+
+              <th>Date</th>
+
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="lostItemsBody">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <button class="back-btn" onclick="goToPage('menuPage')">← Back to Menu</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADMIN PANEL PAGE -->
+
+  <div id="adminPage" class="page">
+
+    <div class="header">
+
+      <h2>Admin Panel - Manage Items</h2>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <div class="container">
+
+      <h1>All Items Management</h1>
+
+
+      <div class="search-box">
+
+        <input type="text" id="adminSearchBox" placeholder="Search items by name or description...">
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>📦 Found Items</h2>
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Item Name</th>
+
+              <th>Description</th>
+
+              <th>Date Found</th>
+
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="adminFoundItemsBody">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>🔍 Lost Items</h2>
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Item Name</th>
+
+              <th>Description</th>
+
+              <th>Date Lost</th>
+
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="adminLostItemsBody">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <button class="back-btn" onclick="goToPage('menuPage')">← Back to Menu</button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function isValidEmail(email) {
+
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    }
+
+
+    function toggleLoginRegister() {
+
+      document.getElementById("loginForm").classList.toggle("hidden");
+
+      document.getElementById("registerForm").classList.toggle("hidden");
+
+    }
+
+
+    function register() {
+
+      let name = document.getElementById("registerName").value;
+
+      let email = document.getElementById("registerEmail").value;
+
+      let password = document.getElementById("registerPassword").value;
+
+      let confirmPassword = document.getElementById("registerConfirmPassword").value;
+
+      let userType = document.getElementById("userType").value;
+
+      let messageDiv = document.getElementById("registerMessage");
+
+
+      if (!name || !email || !password || !confirmPassword) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "All fields are required!";
+
+        return;
+
+      }
+
+
+      if (!isValidEmail(email)) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "Please enter a valid email address!";
+
+        return;
+
+      }
+
+
+      if (password !== confirmPassword) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "Passwords do not match!";
+
+        return;
+
+      }
+
+
+      if (password.length < 6) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "Password must be at least 6 characters!";
+
+        return;
+
+      }
+
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (users.find(user => user.email === email)) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "This email is already registered!";
+
+        return;
+
+      }
+
+
+      users.push({
+
+        name: name,
+
+        email: email,
+
+        password: password,
+
+        type: userType
+
+      });
+
+      localStorage.setItem("users", JSON.stringify(users));
+
+
+      messageDiv.className = "message success";
+
+      messageDiv.textContent = "Registration successful! Redirecting to login...";
+
+     
+
+      document.getElementById("registerName").value = "";
+
+      document.getElementById("registerEmail").value = "";
+
+      document.getElementById("registerPassword").value = "";
+
+      document.getElementById("registerConfirmPassword").value = "";
+
+      document.getElementById("userType").value = "normal";
+
+
+      setTimeout(() => {
+
+        toggleLoginRegister();
+
+        document.getElementById("loginMessage").textContent = "";
+
+      }, 2000);
+
+    }
+
+
+    function login() {
+
+      let email = document.getElementById("loginEmail").value;
+
+      let password = document.getElementById("loginPassword").value;
+
+      let messageDiv = document.getElementById("loginMessage");
+
+
+      if (!email || !password) {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "Email and password are required!";
+
+        return;
+
+      }
+
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      let user = users.find(u => u.email === email && u.password === password);
+
+
+      if (user) {
+
+        localStorage.setItem("currentUser", JSON.stringify(user));
+
+        messageDiv.className = "message success";
+
+        messageDiv.textContent = "Login successful! Redirecting...";
+
+       
+
+        setTimeout(() => {
+
+          goToPage('menuPage');
+
+        }, 1000);
+
+      } else {
+
+        messageDiv.className = "message error";
+
+        messageDiv.textContent = "Invalid email or password!";
+
+      }
+
+    }
+
+
+    function logout() {
+
+      if (confirm("Are you sure you want to logout?")) {
+
+        localStorage.removeItem("currentUser");
+
+        goToPage('loginPage');
+
+      }
+
+    }
+
+
+    function goToPage(pageName) {
+
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+     
+
+      if (pageName !== 'loginPage' && !currentUser) {
+
+        goToPage('loginPage');
+
+        return;
+
+      }
+
+
+      if (pageName === 'adminPage' && currentUser.type !== 'admin') {
+
+        alert("Access Denied! Admin only.");
+
+        return;
+
+      }
+
+
+      document.querySelectorAll('.page').forEach(page => {
+
+        page.classList.remove('active');
+
+      });
+
+
+      document.getElementById(pageName).classList.add('active');
+
+
+      if (pageName === 'menuPage') {
+
+        document.getElementById("userName").textContent = currentUser.name;
+
+        document.getElementById("userType").textContent = currentUser.type === "admin" ? "Admin" : "User";
+
+       
+
+        if (currentUser.type === "admin") {
+
+          document.getElementById("adminOnly").style.display = "block";
+
+        } else {
+
+          document.getElementById("adminOnly").style.display = "none";
+
+        }
+
+      }
+
+
+      if (pageName === 'viewItemsPage') {
+
+        displayFoundItems();
+
+        displayLostItems();
+
+      }
+
+
+      if (pageName === 'adminPage') {
+
+        displayAdminFoundItems();
+
+        displayAdminLostItems();
+
+      }
+
+    }
+
+
+    document.getElementById("foundform").addEventListener("submit", (e) => {
+
+      e.preventDefault();
+
+      let itemname = document.getElementById("foundItemName").value;
+
+      let description = document.getElementById("foundDescription").value;
+
+      let date = document.getElementById("foundDate").value;
+
+     
+
+      let items = JSON.parse(localStorage.getItem("items")) || [];
+
+      items.push({ itemname, description, date });
+
+      localStorage.setItem("items", JSON.stringify(items));
+
+     
+
+      document.getElementById("foundMessage").className = "message success";
+
+      document.getElementById("foundMessage").textContent = "Found item reported successfully!";
+
+     
+
+      document.getElementById("foundform").reset();
+
+     
+
+      setTimeout(() => {
+
+        goToPage('menuPage');
+
+      }, 1500);
+
+    });
+
+
+    document.getElementById("lostform").addEventListener("submit", (e) => {
+
+      e.preventDefault();
+
+      let itemname = document.getElementById("lostItemName").value;
+
+      let description = document.getElementById("lostDescription").value;
+
+      let date = document.getElementById("lostDate").value;
+
+     
+
+      let lostItems = JSON.parse(localStorage.getItem("lostItems")) || [];
+
+      lostItems.push({ itemname, description, date });
+
+      localStorage.setItem("lostItems", JSON.stringify(lostItems));
+
+     
+
+      document.getElementById("lostMessage").class
